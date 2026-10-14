@@ -1,0 +1,21 @@
+class Solution {
+    public int countDigitOne(int n) {
+        int count = 0;
+
+        for (long factor = 1; factor <= n; factor *= 10) {
+            long higher = n / (factor * 10);
+            long digit = (n / factor) % 10;
+            long current = n % factor;
+
+            if (digit == 0) {
+                count += higher * factor;
+            } else if (digit == 1) {
+                count += higher * factor + current + 1;
+            } else {
+                count += (higher + 1) * factor;
+            }
+        }
+
+        return count;
+    }
+}
